@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-use backend\models\Category;
+use common\models\Category;
 use backend\models\CategorySearch;
 use Yii;
 use yii\base\InvalidConfigException;
