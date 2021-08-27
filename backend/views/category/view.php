@@ -1,15 +1,16 @@
 <?php
 
 use yii\helpers\Html;
+use yii\web\YiiAsset;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model backend\models\Category */
+/* @var $model common\models\Category */
 
 $this->title = $model->title;
 $this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
+YiiAsset::register($this);
 ?>
 <div class="category-view">
 
@@ -32,8 +33,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'title',
             [
-                'attribute'=>'imagePath',
-                'format' => ['image',['width'=>'100','height'=>'100']],
+                'attribute' => 'imagePath',
+                'format' => ['image', ['width' => '100', 'height' => '100']],
             ],
             'jobs_count',
             'sort',

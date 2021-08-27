@@ -48,7 +48,7 @@ class Category extends ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Title',
-            'image' => 'Image',
+            'imagePath' => 'Image',
             'jobs_count' => 'Jobs Count',
             'sort' => 'Sort',
             'created_at' => 'Created At',
@@ -72,4 +72,15 @@ class Category extends ActiveRecord
             return false;
         }
     }
+
+    /**
+     * Gets query for [[JobsByCategory]].
+     *
+     * @return ActiveQuery
+     */
+    public function getJobsByCategory()
+    {
+        return $this->hasMany(JobsByCategory::class, ['job_id' => 'id']);
+    }
+
 }
