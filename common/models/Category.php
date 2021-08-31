@@ -80,7 +80,28 @@ class Category extends ActiveRecord
      */
     public function getJobsByCategory()
     {
-        return $this->hasMany(JobsByCategory::class, ['job_id' => 'id']);
+        return $this->hasMany(JobsByCategory::class, ['category_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Jobs]].
+     *
+     * @return ActiveQuery
+     */
+    public function getJobs()
+    {
+        return $this->hasMany(Job::class, ['id' => 'job_id'])
+            ->via('jobsByCategory');
+    }
+
+    /**
+     * Gets query for [[CategoryJobsCount]].
+     *
+     * @return ActiveQuery
+     */
+    public function getCategoryJobsCount()
+    {
+        return $this->getJobs()->count();
     }
 
 }

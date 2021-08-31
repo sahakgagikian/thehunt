@@ -13,17 +13,20 @@ return [
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'request' => [
-            'csrfParam' => '_csrf-frontend',
+            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+            'cookieValidationKey' => '3eOu6O84mLETE5nY4W9R',
+            'csrfParam' => '_frontendCSRF',
+            'baseUrl' => '',
         ],
         'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'identityCookie' => ['name' => '_frontendUser'],
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
-            'name' => 'advanced-frontend',
-        ],
+            'name' => 'PHPFRONTSESSID',
+            'savePath' => sys_get_temp_dir(),],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [

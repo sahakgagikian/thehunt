@@ -28,8 +28,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'image',
-            'jobs_count',
+            [
+                'attribute' => 'imagePath',
+                'format' => ['image', ['width' => '100', 'height' => '100']],
+            ],
+            'categoryJobsCount',
             'sort',
             'created_at',
             'updated_at',
@@ -37,6 +40,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
 
 </div>

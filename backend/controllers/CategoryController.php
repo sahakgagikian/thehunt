@@ -4,36 +4,15 @@ namespace backend\controllers;
 
 use common\models\Category;
 use backend\models\CategorySearch;
-use Yii;
 use yii\base\InvalidConfigException;
-use yii\filters\VerbFilter;
-use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
  */
-class CategoryController extends Controller
+class CategoryController extends AdminController
 {
-    /**
-     * @inheritDoc
-     */
-    public function behaviors()
-    {
-        return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::class,
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );
-    }
-
     /**
      * Lists all Category models.
      * @return mixed
@@ -130,24 +109,6 @@ class CategoryController extends Controller
         return $this->render('update', [
             'model' => $model,
         ]);
-    }
-
-    /**
-     * Uploads an image.
-     */
-    public function actionUpload()
-    {
-        $model = new Category();
-
-        if (Yii::$app->request->isPost) {
-            $model->image = UploadedFile::getInstance($model, 'image');
-            if ($model->upload()) {
-                // file is uploaded successfully
-                return;
-            }
-        }
-
-        return $this->render('upload', ['model' => $model]);
     }
 
     /**

@@ -16,8 +16,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'image')->fileInput() ?>
 
-    <?= $form->field($model, 'jobs_count')->textInput() ?>
-
     <?= $form->field($model, 'sort')->textInput() ?>
 
     <div class="form-group">
