@@ -20,15 +20,15 @@ return [
             'baseUrl' => '/admin',
         ],
         'user' => [
-            'identityClass' => 'common\models\Admin',
+            'identityClass' => 'backend\models\Admin\Admin',
             'enableAutoLogin' => true,
             'identityCookie' => [
                 'name' => '_backendUser', // unique for backend
             ]
         ],
         'session' => [
-            'name' => 'PHPBACKSESSID',
-            'savePath' => sys_get_temp_dir(),
+            // this is the name of the session cookie used for login on the backend
+            'name' => 'advanced-backend',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
