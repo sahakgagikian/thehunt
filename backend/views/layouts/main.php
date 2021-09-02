@@ -1,6 +1,6 @@
 <?php
 
-/* @var $this \yii\web\View */
+/* @var $this View */
 /* @var $content string */
 
 use backend\assets\AppAsset;
@@ -9,6 +9,7 @@ use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
+use yii\web\View;
 
 AppAsset::register($this);
 ?>
@@ -38,6 +39,7 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/']],
         ['label' => 'Categories', 'url' => ['/category/']],
         ['label' => 'Jobs', 'url' => ['/job/']],
+        ['label' => 'Companies', 'url' => ['/company/']],
     ];
     if (Yii::$app->user->isGuest) {
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];

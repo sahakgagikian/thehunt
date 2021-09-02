@@ -28,11 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
+
             [
                 'attribute' => 'imagePath',
                 'format' => ['image', ['width' => '100', 'height' => '100']],
             ],
-            'categoryJobsCount',
+
+            'jobs_count',
             'sort',
             'created_at',
             'updated_at',
