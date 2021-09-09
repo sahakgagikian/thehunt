@@ -44,6 +44,13 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'home/index',
+                'index2' => 'home/index2',
+                'about' => 'about/about',
+                'resume' => 'resume/resume',
+                'contact' => 'contact/contact',
+                'login' => 'log/login',
+                'logout' => 'log/logout',
             ],
         ],
 

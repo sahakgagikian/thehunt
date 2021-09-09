@@ -34,7 +34,7 @@ YiiAsset::register($this);
             'title',
             [
                 'attribute' => 'company_id',
-                'value' => $model->company->name,
+                'value' => $model->company->username,
             ],
             'open_jobs_count',
             'location',

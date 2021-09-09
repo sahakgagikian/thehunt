@@ -39,6 +39,7 @@ AppAsset::register($this);
         ['label' => 'Home', 'url' => ['/']],
         ['label' => 'Categories', 'url' => ['/category/']],
         ['label' => 'Jobs', 'url' => ['/job/']],
+        ['label' => 'Candidates', 'url' => ['/candidate/']],
         ['label' => 'Companies', 'url' => ['/company/']],
     ];
     if (Yii::$app->user->isGuest) {

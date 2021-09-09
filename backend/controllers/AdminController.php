@@ -21,9 +21,7 @@ class AdminController extends Controller
                 'rules' => [
                     [
                         'allow' => true,
-                        'matchCallback' => function ($rule, $action) {
-                            return true;
-                        }
+                        'roles' => ['@'],
                     ],
                 ],
             ],

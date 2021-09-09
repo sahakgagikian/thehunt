@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'company',
                 'value' => function ($item) {
-                    return $item->company->name;
+                    return $item->company->username;
                 },
             ],
 

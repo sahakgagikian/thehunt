@@ -9,7 +9,7 @@ use yii\db\ActiveRecord;
  * This is the model class for table "companies".
  *
  * @property int $id
- * @property string $name
+ * @property string $username
  * @property string $logo
  *
  * @property Job[] $jobs
@@ -30,8 +30,8 @@ class Company extends ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'logo'], 'required'],
-            [['name'], 'string', 'max' => 64],
+            [['username', 'logo'], 'required'],
+            [['username'], 'string', 'max' => 64],
         ];
     }
 
@@ -42,7 +42,7 @@ class Company extends ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'username' => 'Name',
             'imagePath' => 'Logo',
         ];
     }

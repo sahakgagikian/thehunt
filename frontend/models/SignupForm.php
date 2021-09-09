@@ -15,7 +15,6 @@ class SignupForm extends Model
     public $email;
     public $password;
 
-
     /**
      * {@inheritdoc}
      */
@@ -77,4 +76,17 @@ class SignupForm extends Model
             ->setSubject('Account registration at ' . Yii::$app->name)
             ->send();
     }
+
+    public function textInput($options = [])
+    {
+        parent::textInput($options);
+        $this->template = '{label}
+                        {input}
+                        <div class="error">{error}{hint}
+                        </div>
+            ';
+        $this->options = ['class' => 'form-group label-floating'];
+        return $this;
+    }
+
 }
