@@ -51,6 +51,7 @@ return [
                 'contact' => 'contact/contact',
                 'login' => 'log/login',
                 'logout' => 'log/logout',
+                '<controller>/<action>/<id:\d+>' => '<controller>/<action>'
             ],
         ],
 

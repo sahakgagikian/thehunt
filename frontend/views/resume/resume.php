@@ -5,7 +5,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = 'TheHunt - Job Portal';
+$this->title = 'Resume';
 ?>
 
 <!-- Page Header Start -->
@@ -31,12 +31,11 @@ $this->title = 'TheHunt - Job Portal';
                     <h4>Manage Account</h4>
                     <ul class="list-item">
                         <li><a class="active" href="<?= Url::to(['resume/resume']) ?>">My Resume</a></li>
-                        <li><a href="../../../backend/web/index.php">Bookmarked Jobs</a></li>
-                        <li><a href="../../../backend/web/index.php">Notifications <span class="notinumber">2</span></a></li>
-                        <li><a href="../../../backend/web/index.php">Manage Applications</a></li>
-                        <li><a href="../../../backend/web/index.php">Job Alerts</a></li>
-                        <li><a href="../../../backend/web/index.php">Change Password</a></li>
-                        <li><a href="../../../backend/web/index.php">Sing Out</a></li>
+                        <li><a href="#">Bookmarked Jobs</a></li>
+                        <li><a href="#">Notifications <span class="notinumber">2</span></a></li>
+                        <li><a href="#">Job Alerts</a></li>
+                        <li><a href="#">Change Password</a></li>
+                        <li><a href="#">Sing Out</a></li>
                     </ul>
                 </div>
             </div>

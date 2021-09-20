@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
-$this->title = 'TheHunt - Job Portal';
+$this->title = 'Register as candidate';
 ?>
 
 <!-- Page Header Start -->

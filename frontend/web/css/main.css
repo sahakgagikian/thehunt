@@ -1974,6 +1974,10 @@ Pricing Table
   font-size: 18px;
   font-weight: 500;
   margin-bottom: 10px; }
+/*
+.add-resume button {
+  !*margin-bottom: 10px;*!
+}*/
 .add-resume .control-label {
   margin-bottom: 5px; }
 

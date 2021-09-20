@@ -4,7 +4,7 @@
 
 use yii\helpers\Url;
 
-$this->title = 'TheHunt - Job Portal';
+$this->title = 'Home';
 ?>
 <!-- Find Job Section Start -->
 <div class="container" style="margin-top: 150px">

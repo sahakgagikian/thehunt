@@ -53,6 +53,9 @@ class CompanyController extends AdminController
             if ($model->load($this->request->post())) {
                 $model->logo = UploadedFile::getInstance($model, 'logo');
                 if ($model->upload() && $model->save()) {
+                    echo '<pre>';
+                    print_r($model->logo);
+                    die;
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             }

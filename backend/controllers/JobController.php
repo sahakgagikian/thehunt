@@ -7,7 +7,6 @@ use common\models\Category;
 use common\models\Company;
 use common\models\Job;
 use common\models\JobsByCategory;
-use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 
@@ -89,7 +88,7 @@ class JobController extends AdminController
         return $this->render('create', [
             'model' => $model,
             'allCategoryIds' => ArrayHelper::map(Category::find()->asArray()->all(), 'id', 'title'),
-            'allCompanyIds' => ArrayHelper::map(Company::find()->asArray()->all(), 'id', 'name')
+            'allCompanyIds' => ArrayHelper::map(Company::find()->asArray()->all(), 'id', 'username')
         ]);
     }
 

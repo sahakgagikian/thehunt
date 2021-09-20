@@ -1,10 +1,13 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $jobModel common\models\Job */
 
-use yii\helpers\Html;
+use yii\helpers\Url;
 
-$this->title = 'TheHunt - Job Portal';
+$this->params['breadcrumbs'][] = ['url' => ['view', 'id' => $jobModel->id]];
+
+$this->title = 'Job details';
 ?>
 
 <!-- Page Header Start -->
@@ -14,13 +17,13 @@ $this->title = 'TheHunt - Job Portal';
             <div class="col-lg-8 col-md-6 col-xs-12">
                 <div class="breadcrumb-wrapper">
                     <div class="img-wrapper">
-                        <img src="assets/img/about/company-logo.png" alt="">
+                        <img src="<?= $jobModel->company->imagePath ?>" style="width: 70px; height: 70px" alt="">
                     </div>
                     <div class="content">
-                        <h3 class="product-title">Hiring UI Designer</h3>
-                        <p class="brand">UIDeck Inc.</p>
+                        <h3 class="product-title"><?= $jobModel->title ?></h3>
+                        <p class="brand"><?= $jobModel->company->username ?></p>
                         <div class="tags">
-                            <span><i class="lni-map-marker"></i> New York</span>
+                            <span><i class="lni-map-marker"></i><?= $jobModel->location ?></span>
                             <span><i class="lni-calendar"></i> Posted 26 June, 2020</span>
                         </div>
                     </div>
@@ -56,7 +59,7 @@ $this->title = 'TheHunt - Job Portal';
                     </ul>
                     <h5>How To Apply</h5>
                     <p>Proin gravida nibh vel velit auctor aliquet. Aenean sollicitudin, lorem quis bibendum auctor, nisi elit consequat ipsum, nec sagittis sem nibh id elit. Duis sed odio sit amet nibh vulputate cursus a sit amet mauris.</p>
-                    <a href="#" class="btn btn-common">Apply job</a>
+                    <a href="<?= Url::to(['pages/apply?id=' . $jobModel->id]) ?>" class="btn btn-common">Apply job</a>
                 </div>
             </div>
             <div class="col-lg-4 col-md-12 col-xs-12">

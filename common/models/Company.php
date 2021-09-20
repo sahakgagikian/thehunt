@@ -11,8 +11,10 @@ use yii\db\ActiveRecord;
  * @property int $id
  * @property string $username
  * @property string $logo
+ * @property int $user_id
  *
  * @property Job[] $jobs
+ * @property string $imagePath
  */
 class Company extends ActiveRecord
 {
@@ -49,14 +51,14 @@ class Company extends ActiveRecord
 
     public function getImagePath()
     {
-        return '/backend/web/' . $this->logo;
+        return '/' . $this->logo;
     }
 
     public function upload()
     {
         if ($this->validate()) {
             $path = 'images/' . uniqid('logo') . '.' . $this->logo->extension;
-            $this->logo->saveAs('@backend/web/' . $path);
+            $this->logo->saveAs('@frontend/web/' . $path);
             $this->logo = $path;
             return true;
         } else {

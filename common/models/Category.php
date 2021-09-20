@@ -58,14 +58,14 @@ class Category extends ActiveRecord
 
     public function getImagePath()
     {
-        return '/backend/web/' . $this->image;
+        return '/' . $this->image;
     }
 
     public function upload()
     {
         if ($this->validate()) {
             $path = 'images/' . uniqid('category_image') . '.' . $this->image->extension;
-            $this->image->saveAs('@backend/web/' . $path);
+            $this->image->saveAs('@frontend/web/' . $path);
             $this->image = $path;
             return true;
         } else {

@@ -4,7 +4,7 @@
 
 use yii\helpers\Html;
 
-$this->title = 'TheHunt - Job Portal';
+$this->title = 'Blog - Single post';
 ?>
 
 <!-- Page Header Start -->

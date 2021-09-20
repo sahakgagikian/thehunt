@@ -21,7 +21,10 @@ Asset::register($this);
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <meta name="author" content="Grayrids">
         <?php $this->registerCsrfMetaTags() ?>
-        <title>TheHunt - Bootstrap HTML5 Job Portal Template</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" defer></script>
+        <title><?= $this->title ?></title>
         <?php $this->head() ?>
     </head>
 
@@ -62,7 +65,6 @@ Asset::register($this);
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" id="about" href="<?= Url::to(['about/about']) ?>">About</a></li>
                                     <li><a class="dropdown-item" id="job-page" href="<?= Url::to(['pages/job-page']) ?>">Job Page</a></li>
-                                    <li><a class="dropdown-item" id="job-details" href="<?= Url::to(['pages/job-details']) ?>">Job Details</a></li>
                                     <li><a class="dropdown-item" id="resume" href="<?= Url::to(['resume/resume']) ?>">Resume Page</a></li>
                                     <li><a class="dropdown-item" id="privacy-policy" href="<?= Url::to(['pages/privacy-policy']) ?>">Privacy
                                             Policy</a></li>
@@ -71,35 +73,49 @@ Asset::register($this);
                                     <li><a class="dropdown-item" href="<?= Url::to(['contact/contact']) ?>">Contact</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item dropdown" id="candidates">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Candidates
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" id="browse-jobs" href="<?= Url::to(['candidates/browse-jobs']) ?>">Browse Jobs</a>
+                            <?php if (!Yii::$app->user->isGuest): ?>
+                                <?php if (Yii::$app->user->identity->type === 'candidate'): ?>
+                                    <li class="nav-item dropdown" id="candidates">
+                                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false">
+                                            Actions
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" id="browse-jobs" href="<?= Url::to(['candidates/browse-jobs']) ?>">Browse
+                                                    Jobs</a>
+                                            </li>
+                                            <li><a class="dropdown-item" id="browse-categories"
+                                                   href="<?= Url::to(['candidates/browse-categories']) ?>">Browse
+                                                    Categories</a></li>
+                                            <li><a class="dropdown-item" id="add-resume" href="<?= Url::to(['resume/add-resume']) ?>">Add Resume</a>
+                                            </li>
+                                            <li><a class="dropdown-item" id="manage-resumes" href="<?= Url::to(['resume/manage-resumes']) ?>">Manage
+                                                    Resumes</a></li>
+                                            <li><a class="dropdown-item" id="job-alerts" href="<?= Url::to(['candidates/job-alerts']) ?>">Job
+                                                    Alerts</a>
+                                            </li>
+                                        </ul>
                                     </li>
-                                    <li><a class="dropdown-item" id="browse-categories" href="<?= Url::to(['candidates/browse-categories']) ?>">Browse
-                                            Categories</a></li>
-                                    <li><a class="dropdown-item" id="add-resume" href="<?= Url::to(['resume/add-resume']) ?>">Add Resume</a></li>
-                                    <li><a class="dropdown-item" id="manage-resumes" href="<?= Url::to(['resume/manage-resumes']) ?>">Manage
-                                            Resumes</a></li>
-                                    <li><a class="dropdown-item" id="job-alerts" href="<?= Url::to(['candidates/job-alerts']) ?>">Job Alerts</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown" id="employers">
-                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Employers
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" id="post-job" href="<?= Url::to(['employers/post-job']) ?>">Add Job</a></li>
-                                    <li><a class="dropdown-item" id="manage-jobs" href="<?= Url::to(['employers/manage-jobs']) ?>">Manage Jobs</a>
+                                <?php elseif (Yii::$app->user->identity->type === 'company'): ?>
+                                    <li class="nav-item dropdown" id="employers">
+                                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
+                                           aria-expanded="false">
+                                            Actions
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" id="post-job" href="<?= Url::to(['employers/post-job']) ?>">Add Job</a></li>
+                                            <li><a class="dropdown-item" id="manage-jobs" href="<?= Url::to(['employers/manage-jobs']) ?>">Manage
+                                                    Jobs</a>
+                                            </li>
+                                            <li><a class="dropdown-item" id="manage-applications"
+                                                   href="<?= Url::to(['employers/manage-applications']) ?>">Manage
+                                                    Applications</a></li>
+                                            <li><a class="dropdown-item" id="browse-resumes" href="<?= Url::to(['resume/browse-resumes']) ?>">Browse
+                                                    Resumes</a></li>
+                                        </ul>
                                     </li>
-                                    <li><a class="dropdown-item" id="manage-applications" href="<?= Url::to(['employers/manage-applications']) ?>">Manage
-                                            Applications</a></li>
-                                    <li><a class="dropdown-item" id="browse-resumes" href="<?= Url::to(['resume/browse-resumes']) ?>">Browse
-                                            Resumes</a></li>
-                                </ul>
-                            </li>
+                                <?php endif; ?>
+                            <?php endif; ?>
                             <li class="nav-item dropdown" id="blog">
                                 <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Blog
@@ -121,7 +137,7 @@ Asset::register($this);
                                 </a>
                             </li>
                             <?php if (Yii::$app->user->isGuest): ?>
-                                <li class="nav-item" id="login">
+                                <li class="nav-item" id="log">
                                     <a class="nav-link" href="<?= Url::to(['log/login']) ?>">
                                         Log in
                                     </a>
@@ -139,9 +155,9 @@ Asset::register($this);
                                     </ul>
                                 </li>
                             <?php else: ?>
-                                <li class="nav-item" id="logout">
+                                <li class="nav-item">
                                     <a class="nav-link" href="<?= Url::to(['log/logout']) ?>" data-method="post">
-                                        Log out
+                                        Log out (<?= Yii::$app->user->identity->username ?>)
                                     </a>
                                 </li>
                             <?php endif; ?>

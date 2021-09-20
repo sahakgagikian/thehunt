@@ -4,7 +4,6 @@ namespace frontend\controllers;
 
 use frontend\models\LoginForm;
 use Yii;
-use yii\web\Controller;
 
 /**
  * Login controller
@@ -41,5 +40,9 @@ class LogController extends SiteController
 
         return $this->render('logout');
 //        return $this->goHome();
+    }
+
+    public function isCandidate($user) {
+
     }
 }

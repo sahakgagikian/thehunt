@@ -5,6 +5,7 @@ namespace common\models;
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 
@@ -17,11 +18,15 @@ use yii\web\IdentityInterface;
  * @property string $password_reset_token
  * @property string $verification_token
  * @property string $email
+ * @property string $type
  * @property string $auth_key
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ *
+ * @property Company $company
+ * @property Candidate $candidate
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -44,7 +49,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function behaviors()
     {
         return [
-            TimestampBehavior::className(),
+            TimestampBehavior::class,
         ];
     }
 
@@ -214,5 +219,15 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public function getCompany(): ActiveQuery
+    {
+        return $this->hasOne(Company::class, ['user_id' => 'id']);
+    }
+
+    public function getCandidate(): ActiveQuery
+    {
+        return $this->hasOne(Candidate::class, ['user_id' => 'id']);
     }
 }

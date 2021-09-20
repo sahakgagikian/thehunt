@@ -4,7 +4,7 @@
 
 use yii\helpers\Url;
 
-$this->title = 'TheHunt - Job Portal';
+$this->title = 'Home 2';
 ?>
 <!-- Browse Catagories Section Start -->
 <section class="browse-catagories section">

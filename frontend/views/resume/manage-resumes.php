@@ -1,10 +1,11 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $candidateResumes array */
 
 use yii\helpers\Url;
 
-$this->title = 'TheHunt - Job Portal';
+$this->title = 'Manage resumes';
 ?>
 
 <!-- Page Header Start -->
@@ -42,108 +43,34 @@ $this->title = 'TheHunt - Job Portal';
             </div>
             <div class="col-lg-8 col-md-12 col-xs-12">
                 <div class="job-alerts-item candidates">
-                    <h3 class="alerts-title">Manage Resumes</h3>
-                    <div class="manager-resumes-item">
-                        <div class="manager-content">
-                            <a href="../../../backend/web/index.php"><img class="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt=""></a>
-                            <div class="manager-info">
-                                <div class="manager-name">
-                                    <h4><a href="#">Zane Joyner</a></h4>
-                                    <h5>Front-end developer</h5>
-                                </div>
-                                <div class="manager-meta">
-                                    <span class="location"><i class="lni-map-marker"></i> Cupertino, CA, USA</span>
-                                    <span class="rate"><i class="lni-alarm-clock"></i> $55 per hour</span>
+                    <?php foreach ($candidateResumes as $resume): ?>
+                        <div class="manager-resumes-item">
+                            <div class="manager-content">
+                                <a href="<?= Url::to(['resume/view-resume/' . $resume->id]) ?>"><img class="resume-thumb" src="<?= $resume->coverImagePath ?>" alt=""></a>
+                                <div class="manager-info">
+                                    <div class="manager-name">
+                                        <h4><a href="<?= Url::to(['resume/view-resume/' . $resume->id]) ?>"><?= $resume->candidate_name ?></a></h4>
+                                        <h5><?= $resume->candidate_profession_title ?></h5>
+                                    </div>
+                                    <div class="manager-meta">
+                                        <span class="location"><i class="lni-map-marker"></i> <?= $resume->candidate_location ?></span>
+                                        <span class="rate"><i class="lni-alarm-clock"></i> $<?= $resume->candidate_desired_salary ?> per hour</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="update-date">
-                            <p class="status">
-                                <strong>Updated on:</strong> Fab 22, 2020
-                            </p>
-                            <div class="action-btn">
-                                <a class="btn btn-xs btn-gray" href="#">Hide</a>
-                                <a class="btn btn-xs btn-gray" href="#">Edit</a>
-                                <a class="btn btn-xs btn-danger" href="#">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="manager-resumes-item">
-                        <div class="manager-content">
-                            <a href="../../../backend/web/index.php"><img class="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt=""></a>
-                            <div class="manager-info">
-                                <div class="manager-name">
-                                    <h4><a href="#">Zane Joyner</a></h4>
-                                    <h5>Front-end developer</h5>
-                                </div>
-                                <div class="manager-meta">
-                                    <span class="location"><i class="lni-map-marker"></i> Cupertino, CA, USA</span>
-                                    <span class="rate"><i class="lni-alarm-clock"></i> $55 per hour</span>
+                            <div class="update-date">
+                                <p class="status">
+                                    <strong>Updated on:</strong> <?= date("d-m-Y", strtotime($resume->update_date)) ?>
+                                </p>
+                                <div class="action-btn">
+                                    <a class="btn btn-xs btn-gray" href="#">Hide</a>
+                                    <a class="btn btn-xs btn-gray" href="#">Edit</a>
+                                    <a class="btn btn-xs btn-danger" href="#">Delete</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="update-date">
-                            <p class="status">
-                                <strong>Updated on:</strong> Fab 22, 2020
-                            </p>
-                            <div class="action-btn">
-                                <a class="btn btn-xs btn-gray" href="#">Hide</a>
-                                <a class="btn btn-xs btn-gray" href="#">Edit</a>
-                                <a class="btn btn-xs btn-danger" href="#">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="manager-resumes-item">
-                        <div class="manager-content">
-                            <a href="../../../backend/web/index.php"><img class="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt=""></a>
-                            <div class="manager-info">
-                                <div class="manager-name">
-                                    <h4><a href="#">Zane Joyner</a></h4>
-                                    <h5>Front-end developer</h5>
-                                </div>
-                                <div class="manager-meta">
-                                    <span class="location"><i class="lni-map-marker"></i> Cupertino, CA, USA</span>
-                                    <span class="rate"><i class="lni-alarm-clock"></i> $55 per hour</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="update-date">
-                            <p class="status">
-                                <strong>Updated on:</strong> Fab 22, 2020
-                            </p>
-                            <div class="action-btn">
-                                <a class="btn btn-xs btn-gray" href="#">Hide</a>
-                                <a class="btn btn-xs btn-gray" href="#">Edit</a>
-                                <a class="btn btn-xs btn-danger" href="#">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="manager-resumes-item">
-                        <div class="manager-content">
-                            <a href="../../../backend/web/index.php"><img class="resume-thumb" src="assets/img/jobs/avatar-1.jpg" alt=""></a>
-                            <div class="manager-info">
-                                <div class="manager-name">
-                                    <h4><a href="#">Zane Joyner</a></h4>
-                                    <h5>Front-end developer</h5>
-                                </div>
-                                <div class="manager-meta">
-                                    <span class="location"><i class="lni-map-marker"></i> Cupertino, CA, USA</span>
-                                    <span class="rate"><i class="lni-alarm-clock"></i> $55 per hour</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="update-date">
-                            <p class="status">
-                                <strong>Updated on:</strong> Fab 22, 2020
-                            </p>
-                            <div class="action-btn">
-                                <a class="btn btn-xs btn-gray" href="#">Hide</a>
-                                <a class="btn btn-xs btn-gray" href="#">Edit</a>
-                                <a class="btn btn-xs btn-danger" href="#">Delete</a>
-                            </div>
-                        </div>
-                    </div>
-                    <a class="btn btn-common btn-sm" href="add-resume.php">Add new resume</a>
+                    <?php endforeach; ?>
+                    <a class="btn btn-common btn-sm" href="<?= Url::to(['resume/add-resume']) ?>">Add new resume</a>
                 </div>
             </div>
         </div>

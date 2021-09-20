@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use common\models\User;
 use Yii;
 
 /**
@@ -9,10 +10,13 @@ use Yii;
  */
 class CompanySignupForm extends SignupForm
 {
+    const REGISTRATION_TYPE = self::COMPANY;
+
     public $username;
     public $email;
     public $logo;
     public $password;
+
 
     /**
      * {@inheritdoc}
@@ -35,14 +39,44 @@ class CompanySignupForm extends SignupForm
 
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
+
+            ['type', 'string'],
+            ['type', 'in', 'range' => [self::REGISTRATION_TYPE]],
         ];
+    }
+
+    /**
+     * Signs user up.
+     *
+     * @return User|null whether the creating new account was successful and email was sent
+     */
+    public function signup(): ?User
+    {
+        if (!$this->validate()) {
+            return null;
+        }
+
+        $user = new User();
+        $user->username = $this->username;
+        $user->email = $this->email;
+        $user->type = self::REGISTRATION_TYPE;
+        $user->setPassword($this->password);
+        $user->generateAuthKey();
+        $user->generateEmailVerificationToken();
+        $saveAndSendEmail = $user->save() && $this->sendEmail($user);
+
+        if ($saveAndSendEmail) {
+            return $user;
+        }
+
+        return null;
     }
 
     public function upload()
     {
         if ($this->validate()) {
             $path = 'images/' . uniqid('logo') . '.' . $this->logo->extension;
-            $this->logo->saveAs('@backend/web/' . $path);
+            $this->logo->saveAs('@frontend/web/' . $path);
             $this->logo = $path;
             return true;
         } else {

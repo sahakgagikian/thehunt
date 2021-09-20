@@ -1,10 +1,11 @@
 <?php
 
-/* @var $this yii\web\View */
-
 use yii\helpers\Url;
 
-$this->title = 'TheHunt - Job Portal';
+/* @var $this yii\web\View */
+/* @var $allJobs array */
+
+$this->title = 'Browse jobs';
 ?>
 
 <!-- Page Header Start -->
@@ -39,130 +40,35 @@ $this->title = 'TheHunt - Job Portal';
                 </div>
             </div>
             <div class="col-lg-12 col-md-12 col-xs-12">
-                <a class="job-listings" href="<?= Url::to(['pages/job-details']) ?>">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-xs-12">
-                            <div class="job-company-logo">
-                                <img src="/frontend/web/img/features/img1.png" alt="">
+                <?php foreach ($allJobs as $job): ?>
+                    <a class="job-listings" href="<?= Url::to(['pages/job-details/' . $job->id]) ?>">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-xs-12">
+                                <div class="job-company-logo">
+                                    <img src="<?= $job->company->imagePath ?>" style="width: 50px; height: 50px" alt="">
+                                </div>
+                                <div class="job-details">
+                                    <h3><?= $job['title'] ?></h3>
+                                    <span class="company-neme"><?= $job->company->username ?></span>
+                                </div>
                             </div>
-                            <div class="job-details">
-                                <h3>App Developer</h3>
-                                <span class="company-neme">
-                      AmazeSoft
-                    </span>
+                            <div class="col-lg-2 col-md-2 col-xs-12 text-center">
+                                <span class="btn-open"><?= $job['open_jobs_count'] ?> Open Jobs</span>
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-center">
-                  <span class="btn-open">
-                    7 Open Jobs
-                  </span>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-right">
-                            <div class="location">
-                                <i class="lni-map-marker"></i> New Yourk, US
+                            <div class="col-lg-2 col-md-2 col-xs-12 text-right">
+                                <div class="location">
+                                    <i class="lni-map-marker"></i> <?= $job['location'] ?>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-right">
-                            <span class="btn-full-time">Full Time</span>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-right">
-                            <span class="btn-apply">Apply Now</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="job-listings" href="<?= Url::to(['pages/job-details']) ?>">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-xs-12">
-                            <div class="job-company-logo">
-                                <img src="/frontend/web/img/features/img2.png" alt="">
+                            <div class="col-lg-2 col-md-2 col-xs-12 text-right">
+                                <span class="btn-full-time"><?= $job['working_hours'] ?></span>
                             </div>
-                            <div class="job-details">
-                                <h3>App Developer</h3>
-                                <span class="company-neme">
-                      AmazeSoft
-                    </span>
+                            <div class="col-lg-2 col-md-2 col-xs-12 text-right">
+                                <span class="btn-apply">Apply Now</span>
                             </div>
                         </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-center">
-                  <span class="btn-open">
-                    7 Open Jobs
-                  </span>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-right">
-                            <div class="location">
-                                <i class="lni-map-marker"></i> New Yourk, US
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-right">
-                            <span class="btn-full-time">Full Time</span>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-right">
-                            <span class="btn-apply">Apply Now</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="job-listings" href="<?= Url::to(['pages/job-details']) ?>">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-xs-12">
-                            <div class="job-company-logo">
-                                <img src="/frontend/web/img/features/img3.png" alt="">
-                            </div>
-                            <div class="job-details">
-                                <h3>App Developer</h3>
-                                <span class="company-neme">
-                      AmazeSoft
-                    </span>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-center">
-                  <span class="btn-open">
-                    7 Open Jobs
-                  </span>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-right">
-                            <div class="location">
-                                <i class="lni-map-marker"></i> New Yourk, US
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-right">
-                            <span class="btn-full-time">Full Time</span>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-right">
-                            <span class="btn-apply">Apply Now</span>
-                        </div>
-                    </div>
-                </a>
-                <a class="job-listings" href="<?= Url::to(['pages/job-details']) ?>">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-4 col-xs-12">
-                            <div class="job-company-logo">
-                                <img src="/frontend/web/img/features/img4.png" alt="">
-                            </div>
-                            <div class="job-details">
-                                <h3>App Developer</h3>
-                                <span class="company-neme">
-                      AmazeSoft
-                    </span>
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-center">
-                  <span class="btn-open">
-                    7 Open Jobs
-                  </span>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-right">
-                            <div class="location">
-                                <i class="lni-map-marker"></i> New Yourk, US
-                            </div>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-right">
-                            <span class="btn-full-time">Full Time</span>
-                        </div>
-                        <div class="col-lg-2 col-md-2 col-xs-12 text-right">
-                            <span class="btn-apply">Apply Now</span>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                <?php endforeach; ?>
                 <!-- Start Pagination -->
                 <ul class="pagination">
                     <li class="active"><a href="#" class="btn-prev"><i class="lni-angle-left"></i> prev</a></li>

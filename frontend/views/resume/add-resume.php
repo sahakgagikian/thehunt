@@ -2,7 +2,19 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'TheHunt - Job Portal';
+/* @var $resumeModel Resume */
+/* @var $educationModel Education */
+/* @var $experienceModel Experience */
+/* @var $skillModel Skill */
+
+use common\models\Education;
+use common\models\Experience;
+use common\models\Resume;
+use common\models\Skill;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+$this->title = 'Add resume';
 ?>
 
 <!-- Page Header Start -->
@@ -25,167 +37,160 @@ $this->title = 'TheHunt - Job Portal';
         <div class="row justify-content-center">
             <div class="col-lg-9 col-md-12 col-xs-12">
                 <div class="add-resume box">
-                    <div class="post-header">
-                        <p>Already have an account? <a href="../../../backend/web/index.php">Click here to login</a></p>
+                    <?php $form = ActiveForm::begin([
+                        'options' => [
+                            'class' => 'form-ad',
+                        ],
+                    ]); ?>
+
+                    <h3>Basic information</h3>
+                    <div class="form-group">
+                        <label class="control-label">Full name</label>
+                        <?= $form
+                            ->field($resumeModel, 'candidate_name')
+                            ->textInput([
+                                'class' => 'form-control',
+                                'placeholder' => 'Full name'])
+                            ->label(false) ?>
                     </div>
-                    <form class="form-ad">
-                        <h3>Basic information</h3>
-                        <div class="form-group">
-                            <label class="control-label">Name</label>
-                            <input type="text" class="form-control" placeholder="Name">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label"></label>
-                            <label class="control-label">Email</label>
-                            <input type="text" class="form-control" placeholder="Your@domain.com">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Profession Title</label>
-                            <input type="text" class="form-control" placeholder="Headline (e.g. Front-end developer)">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Location</label>
-                            <input type="text" class="form-control" placeholder="Location, e.g">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Web</label>
-                            <input type="text" class="form-control" placeholder="Website address">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Pre Hour</label>
-                            <input type="text" class="form-control" placeholder="Salary, e.g. 85">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Age</label>
-                            <input type="text" class="form-control" placeholder="Years old">
-                        </div>
-                        <div class="form-group">
-                            <div class="button-group">
-                                <div class="action-buttons">
-                                    <div class="upload-button">
-                                        <button class="btn btn-common">Choose a cover image</button>
-                                        <input id="cover_img_file_2" type="file">
-                                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Email</label>
+                        <?= $form
+                            ->field($resumeModel, 'candidate_email')
+                            ->textInput([
+                                'class' => 'form-control',
+                                'placeholder' => 'Your@domain.com'])
+                            ->label(false) ?>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Profession Title</label>
+                        <?= $form
+                            ->field($resumeModel, 'candidate_profession_title')
+                            ->textInput([
+                                'class' => 'form-control',
+                                'placeholder' => 'Headline (e.g. Front-end developer)'])
+                            ->label(false) ?>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Location</label>
+                        <?= $form
+                            ->field($resumeModel, 'candidate_location')
+                            ->textInput([
+                                'class' => 'form-control',
+                                'placeholder' => 'Location, e.g'])
+                            ->label(false) ?>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Web</label>
+                        <?= $form
+                            ->field($resumeModel, 'candidate_website')
+                            ->textInput([
+                                'class' => 'form-control',
+                                'placeholder' => 'Website address'])
+                            ->label(false) ?>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Desired salary per hour</label>
+                        <?= $form
+                            ->field($resumeModel, 'candidate_desired_salary')
+                            ->textInput([
+                                'class' => 'form-control',
+                                'placeholder' => 'Salary, e.g. 85'])
+                            ->label(false) ?>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Age</label>
+                        <?= $form
+                            ->field($resumeModel, 'candidate_age')
+                            ->textInput([
+                                'class' => 'form-control',
+                                'placeholder' => 'Years old'])
+                            ->label(false) ?>
+                    </div>
+                    <div class="form-group">
+                        <div class="button-group">
+                            <div class="action-buttons">
+                                <div class="upload-button">
+                                    <button class="btn btn-common">Choose a cover image</button>
+                                    <?= $form
+                                        ->field($resumeModel, 'cover_image')
+                                        ->fileInput([
+                                            'id' => 'cover_img_file_2',
+                                            'class' => 'form-control'])
+                                        ->label(false) ?>
                                 </div>
                             </div>
                         </div>
-                        <h3>Education</h3>
-                        <div class="form-group">
-                            <label class="control-label">Degree</label>
-                            <input type="text" class="form-control" placeholder="Degree, e.g. Bachelor">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Field of Study</label>
-                            <input type="text" class="form-control" placeholder="Major, e.g Computer Science">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">School</label>
-                            <input type="text" class="form-control" placeholder="School name, e.g. Massachusetts Institute of Technology">
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label class="control-label">From</label>
-                                    <input type="text" class="form-control" placeholder="e.g 2014">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="control-label">To</label>
-                                    <input type="text" class="form-control" placeholder="e.g 2020">
+                    </div>
+
+                    <h3>Education</h3>
+                    <div id="educations-container">
+                        <button class="float-left add-education-form-button">
+                            <i class="ti-plus"></i> Add New Education
+                        </button>
+                        <br>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="button-group">
+                            <div class="action-buttons">
+                                <div class="upload-button">
+                                    <button class="btn btn-common">Choose a cover Logo</button>
+                                    <?= $form
+                                        ->field($resumeModel, 'educations_cover_image')
+                                        ->fileInput([
+                                            'class' => 'form-control'])
+                                        ->label(false) ?>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label">Description</label>
-                            <textarea class="form-control" rows="7"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <div class="button-group">
-                                <div class="action-buttons">
-                                    <div class="upload-button">
-                                        <button class="btn btn-common">Choose a cover Logo</button>
-                                        <input id="cover_img_file_3" type="file">
-                                    </div>
+                    </div>
+                    <br>
+
+                    <h3>Work Experience</h3>
+                    <div id="experiences-container">
+                        <button class="float-left add-experience-form-button">
+                            <i class="ti-plus"></i> Add New Experience
+                        </button>
+                        <br>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <div class="button-group">
+                            <div class="action-buttons">
+                                <div class="upload-button">
+                                    <button class="btn btn-common">Choose a cover Logo</button>
+                                    <?= $form
+                                        ->field($resumeModel, 'experiences_cover_image')
+                                        ->fileInput([
+                                            'class' => 'form-control'])
+                                        ->label(false) ?>
                                 </div>
                             </div>
                         </div>
-                        <div class="add-post-btn">
-                            <div class="float-left">
-                                <a href="#" class="btn-added"><i class="ti-plus"></i> Add New Education</a>
-                            </div>
-                            <div class="float-right">
-                                <a href="#" class="btn-delete"><i class="ti-trash"></i> Delete This</a>
-                            </div>
-                        </div>
-                        <div class="divider"><h3>Work Experience</h3></div>
-                        <div class="form-group">
-                            <label class="control-label">Company Name</label>
-                            <input type="text" class="form-control" placeholder="Company name">
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Title</label>
-                            <input type="text" class="form-control" placeholder="e.g UI/UX Researcher">
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label class="control-label">Date Form</label>
-                                    <input type="text" class="form-control" placeholder="e.g 2014">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="control-label">Date To</label>
-                                    <input type="text" class="form-control" placeholder="e.g 2020">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label">Description</label>
-                        </div>
-                        <section id="editor" style="margin-bottom: 30px;">
-                            <div id="summernote"><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem quia aut modi fugit, ratione saepe
-                                    perferendis odio optio repellat dolorum voluptas excepturi possimus similique veritatis nobis. Provident
-                                    cupiditate delectus, optio?</p></div>
-                        </section>
-                        <div class="form-group">
-                            <div class="button-group">
-                                <div class="action-buttons">
-                                    <div class="upload-button">
-                                        <button class="btn btn-common">Choose a cover Logo</button>
-                                        <input id="cover_img_file_1" type="file">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="add-post-btn">
-                            <div class="float-left">
-                                <a href="#" class="btn-added"><i class="ti-plus"></i> Add New Experience</a>
-                            </div>
-                            <div class="float-right">
-                                <a href="#" class="btn-delete"><i class="ti-trash"></i> Delete This</a>
-                            </div>
-                        </div>
-                        <div class="divider"><h3>Skills</h3></div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label class="control-label">Skill Name</label>
-                                    <input class="form-control" placeholder="Skill name, e.g. HTML" type="text">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="control-label">% (1-100)</label>
-                                    <input class="form-control" placeholder="Skill proficiency, e.g. 90" type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="add-post-btn">
-                            <div class="float-left">
-                                <a href="#" class="btn-added"><i class="ti-plus"></i> Add New Skills</a>
-                            </div>
-                            <div class="float-right">
-                                <a href="#" class="btn-delete"><i class="ti-trash"></i> Delete This</a>
-                            </div>
-                        </div>
-                    </form>
-                    <a href="../../../backend/web/index.php" class="btn btn-common">Save</a>
+                    </div>
+                    <br>
+
+                    <h3>Skills</h3>
+                    <div id="skills-container">
+                        <button class="float-left add-skill-form-button">
+                            <i class="ti-plus"></i> Add New Skill
+                        </button>
+                        <br>
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <?= Html::submitButton(
+                            'Save',
+                            [
+                                'class' => 'btn btn-common',
+                                'name' => 'signup-button'
+                            ])
+                        ?>
+                    </div>
+
+                    <?php ActiveForm::end(); ?>
                 </div>
             </div>
         </div>

@@ -24,9 +24,10 @@ class RegisterController extends Controller
     {
         $model = new CandidateSignupForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->signup()) {
+        if ($model->load(Yii::$app->request->post()) && $user = $model->signup()) {
             $newCandidate = new Candidate();
-            $newCandidate->username = Yii::$app->request->post()['CandidateSignupForm']['username'];
+            $newCandidate->user_id = $user->id;
+            $newCandidate->username = $user->username;
             $newCandidate->save();
 
             return $this->goHome();
@@ -47,9 +48,10 @@ class RegisterController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->logo = UploadedFile::getInstance($model, 'logo');
 
-            if ($model->upload() && $model->signup()) {
+            if ($model->upload() && $user = $model->signup()) {
                 $newCompany = new Company();
-                $newCompany->username = Yii::$app->request->post()['CompanySignupForm']['username'];
+                $newCompany->user_id = $user->id;
+                $newCompany->username = $user->username;
                 $newCompany->logo = $model->logo;
                 $newCompany->save();
 

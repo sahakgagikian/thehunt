@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use Yii;
 use yii\db\ActiveRecord;
 
 /**
@@ -10,6 +9,7 @@ use yii\db\ActiveRecord;
  *
  * @property int $id
  * @property string $username
+ * @property int $user_id
  */
 class Candidate extends ActiveRecord
 {

@@ -1,10 +1,12 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $currentUser User */
 
+use common\models\User;
 use yii\helpers\Html;
 
-$this->title = 'TheHunt - Job Portal';
+$this->title = $currentUser->username . ' - Manage jobs';
 ?>
 
 <!-- Page Header Start -->

@@ -8,6 +8,8 @@ use frontend\models\LoginForm;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
 
+Yii::$app->response->redirect(['log/login']);
+
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>

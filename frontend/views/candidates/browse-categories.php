@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-$this->title = 'TheHunt - Job Portal';
+$this->title = 'Browse categories';
 ?>
 
 <!-- Page Header Start -->

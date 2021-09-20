@@ -14,6 +14,7 @@ use yii\db\ActiveRecord;
  * @property int $open_jobs_count
  * @property string $location
  * @property string $working_hours
+ * @property ActiveQuery $categories
  *
  * @property JobsByCategory[] $jobsByCategories
  */

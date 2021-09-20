@@ -1,10 +1,13 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $currentCompanyApplications array */
+/* @var $currentUser User */
 
-use yii\helpers\Html;
+use common\models\User;
+use yii\helpers\Url;
 
-$this->title = 'TheHunt - Job Portal';
+$this->title = $currentUser->username . ' - Manage applications';
 ?>
 
 <!-- Page Header Start -->
@@ -42,126 +45,30 @@ $this->title = 'TheHunt - Job Portal';
             <div class="col-lg-8 col-md-12 col-xs-12">
                 <div class="job-alerts-item">
                     <h3 class="alerts-title">Manage applications</h3>
-                    <div class="applications-content">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="thums">
-                                    <img src="assets/img/jobs/img-1.jpg" alt="">
+                    <?php foreach ($currentCompanyApplications as $application): ?>
+                        <a href="<?= Url::to(['employers/view-application/' . $application->id]) ?>">
+                            <div class="applications-content">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="thums">
+                                            <img src="<?= $currentUser->company->imagePath ?>" alt="">
+                                        </div>
+                                        <h3><?= $application->job->title ?></h3>
+                                        <span><?= $application->candidate->username ?></span>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p><span class="full-time"><?= $application->job->working_hours ?></span></p>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p>Nov 14th, 2017</p>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Rejected</p>
+                                    </div>
                                 </div>
-                                <h3>Web Designer Meeded</h3>
-                                <span>Quick Studio</span>
                             </div>
-                            <div class="col-md-3">
-                                <p><span class="full-time">Full-Time</span></p>
-                            </div>
-                            <div class="col-md-3">
-                                <p>Nov 14th, 2017</p>
-                            </div>
-                            <div class="col-md-2">
-                                <p>Rejected</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="applications-content">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="thums">
-                                    <img src="assets/img/jobs/img-1.jpg" alt="">
-                                </div>
-                                <h3>Front-end developer needed</h3>
-                                <span>Quick Studio</span>
-                            </div>
-                            <div class="col-md-3">
-                                <p><span class="full-time">Full-Time</span></p>
-                            </div>
-                            <div class="col-md-3">
-                                <p>Nov 14th, 2017</p>
-                            </div>
-                            <div class="col-md-2">
-                                <p>Processed</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="applications-content">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="thums">
-                                    <img src="assets/img/jobs/img-1.jpg" alt="">
-                                </div>
-                                <h3>We're looking for an Art Director</h3>
-                                <span>Quick Studio</span>
-                            </div>
-                            <div class="col-md-3">
-                                <p><span class="part-time">Part-Time</span></p>
-                            </div>
-                            <div class="col-md-3">
-                                <p>Nov 14th, 2017</p>
-                            </div>
-                            <div class="col-md-2">
-                                <p>Rejected</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="applications-content">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="thums">
-                                    <img src="assets/img/jobs/img-1.jpg" alt="">
-                                </div>
-                                <h3>Web designer needed</h3>
-                                <span>Quick Studio</span>
-                            </div>
-                            <div class="col-md-3">
-                                <p><span class="full-time">Full-Time</span></p>
-                            </div>
-                            <div class="col-md-3">
-                                <p>Nov 14th, 2017</p>
-                            </div>
-                            <div class="col-md-2">
-                                <p>Approved</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="applications-content">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="thums">
-                                    <img src="assets/img/jobs/img-1.jpg" alt="">
-                                </div>
-                                <h3>Looking for a Project Leader</h3>
-                                <span>Quick Studio</span>
-                            </div>
-                            <div class="col-md-3">
-                                <p><span class="full-time">Full-Time</span></p>
-                            </div>
-                            <div class="col-md-3">
-                                <p>Nov 14th, 2017</p>
-                            </div>
-                            <div class="col-md-2">
-                                <p>Rejected</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="applications-content">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="thums">
-                                    <img src="assets/img/jobs/img-1.jpg" alt="">
-                                </div>
-                                <h3>We're hiring an fullstack designer</h3>
-                                <span>Quick Studio</span>
-                            </div>
-                            <div class="col-md-3">
-                                <p><span class="part-time">Part-Time</span></p>
-                            </div>
-                            <div class="col-md-3">
-                                <p>Nov 14th, 2017</p>
-                            </div>
-                            <div class="col-md-2">
-                                <p>Rejected</p>
-                            </div>
-                        </div>
-                    </div>
+                        </a>
+                    <?php endforeach; ?>
                     <br>
                     <!-- Start Pagination -->
                     <ul class="pagination">

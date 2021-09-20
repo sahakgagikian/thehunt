@@ -8,7 +8,7 @@ use frontend\models\LoginForm;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
-$this->title = 'TheHunt - Job Portal';
+$this->title = 'TheHunt - Log in';
 ?>
 
 <!-- Page Header Start -->

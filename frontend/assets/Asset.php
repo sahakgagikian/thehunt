@@ -29,18 +29,6 @@ class Asset extends AppAsset
         'js/form-validator.min.js',
         'js/contact-form-script.js',
         'js/main.js',
-    ];
-    public $img = [
-        'js/jquery-min.js',
-        'js/popper.min.js',
-        'js/bootstrap.min.js',
-        'js/color-switcher.js',
-        'js/owl.carousel.min.js',
-        'js/jquery.slicknav.js',
-        'js/jquery.counterup.min.js',
-        'js/waypoints.min.js',
-        'js/form-validator.min.js',
-        'js/contact-form-script.js',
-        'js/main.js'
+        'js/addons.js',
     ];
 }
