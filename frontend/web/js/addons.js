@@ -5,7 +5,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         $.ajax({
-            url: "/resume/add-education-form",
+            url: "/candidates/add-education-form",
             success: function (result) {
                 $("#educations-container").append(result.replaceAll('eduIndex', window.educationsFormIndex));
                 window.educationsFormIndex++;
@@ -25,7 +25,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         $.ajax({
-            url: "/resume/add-experience-form",
+            url: "/candidates/add-experience-form",
             success: function (result) {
                 $("#experiences-container").append(result.replaceAll('expIndex', window.experiencesFormIndex));
                 window.experiencesFormIndex++;
@@ -45,7 +45,7 @@ $(document).ready(function () {
         e.preventDefault();
 
         $.ajax({
-            url: "/resume/add-skill-form",
+            url: "/candidates/add-skill-form",
             success: function (result) {
                 $("#skills-container").append(result.replaceAll('skillIndex', window.skillsFormIndex));
                 window.skillsFormIndex++;

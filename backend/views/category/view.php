@@ -33,7 +33,7 @@ YiiAsset::register($this);
             'id',
             'title',
             [
-                'attribute' => 'imagePath',
+                'attribute' => 'imageUrl',
                 'format' => ['image', ['width' => '100', 'height' => '100']],
             ],
             'jobs_count',

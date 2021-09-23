@@ -63,7 +63,7 @@ class JobSearch extends Job
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
+            $this->tableName() . '.id' => $this->id,
             'open_jobs_count' => $this->open_jobs_count,
         ]);
 

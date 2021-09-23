@@ -11,14 +11,10 @@ use common\models\User;
  */
 class SignupForm extends Model
 {
-    const REGISTRATION_TYPE = null;
-    const CANDIDATE = 'candidate';
-    const COMPANY = 'company';
-
     public $username;
     public $email;
     public $password;
-    public $type;
+    public $role;
 
     /**
      * Sends confirmation email to user

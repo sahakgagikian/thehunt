@@ -30,7 +30,7 @@ $this->title = 'Resume';
                 <div class="right-sideabr">
                     <h4>Manage Account</h4>
                     <ul class="list-item">
-                        <li><a class="active" href="<?= Url::to(['resume/resume']) ?>">My Resume</a></li>
+                        <li><a class="active" href="<?= Url::to(['candidates/resume']) ?>">My Resume</a></li>
                         <li><a href="#">Bookmarked Jobs</a></li>
                         <li><a href="#">Notifications <span class="notinumber">2</span></a></li>
                         <li><a href="#">Job Alerts</a></li>

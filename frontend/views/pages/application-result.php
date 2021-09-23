@@ -2,7 +2,12 @@
 
 /* @var $this yii\web\View */
 /* @var $successMessage string */
-/* @var $errorMessage string */
+/* @var $message string */
+
+/* @var $applicationModel Application */
+
+use common\models\Application;
+use common\widgets\Alert;
 
 $this->title = 'Application result';
 ?>
@@ -13,9 +18,7 @@ $this->title = 'Application result';
         <div class="row">
             <div class="col-lg-12">
                 <div class="inner-header">
-                    <h1>
-                        <?php echo empty($errorMessage) ? $successMessage : $errorMessage; ?>
-                    </h1>
+                    <h1><?= Alert::widget() ?></h1>
                 </div>
             </div>
         </div>

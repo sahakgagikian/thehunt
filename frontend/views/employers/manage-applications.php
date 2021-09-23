@@ -3,9 +3,11 @@
 /* @var $this yii\web\View */
 /* @var $currentCompanyApplications array */
 /* @var $currentUser User */
+/* @var $searchModel backend\models\JobSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
 use common\models\User;
-use yii\helpers\Url;
+use yii\widgets\ListView;
 
 $this->title = $currentUser->username . ' - Manage applications';
 ?>
@@ -45,30 +47,10 @@ $this->title = $currentUser->username . ' - Manage applications';
             <div class="col-lg-8 col-md-12 col-xs-12">
                 <div class="job-alerts-item">
                     <h3 class="alerts-title">Manage applications</h3>
-                    <?php foreach ($currentCompanyApplications as $application): ?>
-                        <a href="<?= Url::to(['employers/view-application/' . $application->id]) ?>">
-                            <div class="applications-content">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="thums">
-                                            <img src="<?= $currentUser->company->imagePath ?>" alt="">
-                                        </div>
-                                        <h3><?= $application->job->title ?></h3>
-                                        <span><?= $application->candidate->username ?></span>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p><span class="full-time"><?= $application->job->working_hours ?></span></p>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <p>Nov 14th, 2017</p>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <p>Rejected</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    <?php endforeach; ?>
+                    <?= ListView::widget( [
+                        'dataProvider' => $dataProvider,
+                        'itemView' => '_listItem',
+                    ] ) ?>
                     <br>
                     <!-- Start Pagination -->
                     <ul class="pagination">

@@ -10,8 +10,6 @@ use Yii;
  */
 class CandidateSignupForm extends SignupForm
 {
-    const REGISTRATION_TYPE = self::CANDIDATE;
-
     /**
      * {@inheritdoc}
      */
@@ -32,8 +30,8 @@ class CandidateSignupForm extends SignupForm
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
-            ['type', 'string'],
-            ['type', 'in', 'range' => [self::REGISTRATION_TYPE]],
+            ['role', 'integer'],
+            ['role', 'in', 'range' => [1, 2]],
         ];
     }
 
@@ -51,7 +49,7 @@ class CandidateSignupForm extends SignupForm
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
-        $user->type = self::REGISTRATION_TYPE;
+        $user->role = User::CANDIDATE;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();

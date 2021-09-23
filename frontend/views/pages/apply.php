@@ -38,7 +38,7 @@ $this->title = 'Apply to job';
                         <div class="d-flex">
                                 <?= $form->field($applicationModel, 'resume_id')
                                     ->radio(['uncheck' => null, 'value' => $resume->id, 'label' => null]); ?>
-                                <a href="<?= Url::to(['resume/view-resume/' . $resume->id]) ?>">
+                                <a href="<?= Url::to(['candidates/view-resume/' . $resume->id]) ?>">
                                     Title: <?= $resume->candidate_profession_title ?>
                                 </a>
                         </div>
@@ -53,6 +53,11 @@ $this->title = 'Apply to job';
                             ])
                         ?>
                     </div>
+                    <?php
+                    $jobIdError = $applicationModel->getFirstError('job_id');
+                                      if($jobIdError):?>
+                                      <span ><?=$jobIdError?></span>
+                    <?php endif?>
                     <?php ActiveForm::end(); ?>
                     <!--<a class="btn btn-common btn-sm" href="<?php /*echo Url::to(['resume/add-resume']); */ ?>">Add new resume</a>-->
                 </div>

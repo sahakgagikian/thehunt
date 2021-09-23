@@ -2,7 +2,10 @@
 
 namespace common\models;
 
+use Yii;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "categories".
@@ -58,19 +61,29 @@ class Category extends ActiveRecord
 
     public function getImagePath()
     {
-        return '/' . $this->image;
+        return Yii::getAlias('@frontend') . '/web/images/';
+    }
+
+    public function getImageUrl()
+    {
+        return '/images/'. $this->image;
     }
 
     public function upload()
     {
         if ($this->validate()) {
-            $path = 'images/' . uniqid('category_image') . '.' . $this->image->extension;
-            $this->image->saveAs('@frontend/web/' . $path);
-            $this->image = $path;
+            $imageName = uniqid('category_image') . '.' . $this->image->extension;
+            $this->image->saveAs($this->imagePath . $imageName);
+            $this->image = $imageName;
             return true;
         } else {
             return false;
         }
+    }
+
+    public static function getAllCategoryIds(): array
+    {
+        return ArrayHelper::map(Category::find()->asArray()->all(), 'id', 'title');
     }
 
     /**

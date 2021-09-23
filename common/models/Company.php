@@ -2,8 +2,10 @@
 
 namespace common\models;
 
+use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "companies".
@@ -14,7 +16,9 @@ use yii\db\ActiveRecord;
  * @property int $user_id
  *
  * @property Job[] $jobs
+ *
  * @property string $imagePath
+ * @property array $resumeIds
  */
 class Company extends ActiveRecord
 {
@@ -34,6 +38,7 @@ class Company extends ActiveRecord
         return [
             [['username', 'logo'], 'required'],
             [['username'], 'string', 'max' => 64],
+            ['username', 'unique'],
         ];
     }
 
@@ -51,28 +56,54 @@ class Company extends ActiveRecord
 
     public function getImagePath()
     {
-        return '/' . $this->logo;
+        return Yii::getAlias('@frontend') . '/web/images/';
+    }
+
+    public function getImageUrl()
+    {
+        return '/images/'. $this->logo;
     }
 
     public function upload()
     {
         if ($this->validate()) {
-            $path = 'images/' . uniqid('logo') . '.' . $this->logo->extension;
-            $this->logo->saveAs('@frontend/web/' . $path);
-            $this->logo = $path;
+            $imageName = uniqid('logo') . '.' . $this->logo->extension;
+            $this->logo->saveAs($this->imagePath . $imageName);
+            $this->logo = $imageName;
             return true;
         } else {
             return false;
         }
     }
 
+    public static function getAllCompanyIds()
+    {
+        return ArrayHelper::map(Company::find()->asArray()->all(), 'id', 'username');
+    }
+
     /**
-     * Gets query for [[Job]].
+     * Gets query for [[Jobs]].
      *
      * @return ActiveQuery
      */
     public function getJobs()
     {
         return $this->hasMany(Job::class, ['company_id' => 'id']);
+    }
+
+    /**
+     * Gets query for [[Applications]].
+     *
+     * @return ActiveQuery
+     */
+    public function getApplications()
+    {
+        return $this->hasMany(Application::class, ['job_id' => 'id'])
+            ->via('jobs');
+    }
+
+    public function getResumeIds()
+    {
+        return $this->getApplications()->select(['resume_id'])->column();
     }
 }

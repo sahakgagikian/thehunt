@@ -34,7 +34,7 @@ $this->title = $currentApplication->candidate->username . ' - View application';
                     <div class="col-lg-12 col-md-6 col-xs-12">
                         <div class="manager-resumes-item">
                             <div class="manager-content">
-                                <a href="<?= Url::to(['resume/view-resume/' . $currentResume->id]) ?>">
+                                <a href="<?= Url::to(['employers/view-resume/' . $currentResume->id]) ?>">
                                     <div style="text-align: center; font-size: 20px">View resume</div></a>
                             </div>
                         </div>

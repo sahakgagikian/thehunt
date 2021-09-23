@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\Admin\AdminLoginForm;
+use common\models\User;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;

@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\Company;
 use backend\models\CompanySearch;
+use common\models\User;
 use yii\web\NotFoundHttpException;
 use yii\web\UploadedFile;
 
@@ -53,9 +54,6 @@ class CompanyController extends AdminController
             if ($model->load($this->request->post())) {
                 $model->logo = UploadedFile::getInstance($model, 'logo');
                 if ($model->upload() && $model->save()) {
-                    echo '<pre>';
-                    print_r($model->logo);
-                    die;
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             }

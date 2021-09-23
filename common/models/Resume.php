@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -132,6 +133,36 @@ class Resume extends ActiveRecord
     public function getCandidate()
     {
         return $this->hasOne(Candidate::class, ['id' => 'candidate_id']);
+    }
+
+    public static function getCurrentResume($id)
+    {
+        return Resume::find()->with(['educations', 'experiences', 'skills'])->where(['id' => $id])->one();
+    }
+
+    public static function getResume($id, $role)
+    {
+        /* @var User $currentUser */
+        /* @var Resume $currentResume */
+
+        $currentUser = Yii::$app->getUser()->identity;
+        $currentResume = self::getCurrentResume($id);
+
+        if (!$currentResume || !in_array($currentResume->id, $currentUser->{$role}->resumeIds)) {
+            return false;
+        }
+
+        return $currentResume;
+    }
+
+    /**
+     * Gets query for [[Applications]].
+     *
+     * @return ActiveQuery
+     */
+    public function getApplications()
+    {
+        return $this->hasMany(Application::class, ['id' => 'application_id']);
     }
 
     /**

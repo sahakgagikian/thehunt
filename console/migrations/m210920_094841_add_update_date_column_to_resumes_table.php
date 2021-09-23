@@ -3,9 +3,9 @@
 use yii\db\Migration;
 
 /**
- * Class m210920_094841_add_update_date__columnToresumestable
+ * Class m210920_094841_add_update_date_column_to_resumes_table
  */
-class m210920_094841_add_update_date__columnToresumestable extends Migration
+class m210920_094841_add_update_date_column_to_resumes_table extends Migration
 {
     /**
      * {@inheritdoc}

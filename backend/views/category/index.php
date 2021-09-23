@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'title',
 
             [
-                'attribute' => 'imagePath',
+                'attribute' => 'imageUrl',
                 'format' => ['image', ['width' => '100', 'height' => '100']],
             ],
 

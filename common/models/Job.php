@@ -95,4 +95,15 @@ class Job extends ActiveRecord
     {
         return $this->hasOne(Company::class, ['id' => 'company_id']);
     }
+
+
+    /**
+     * Gets query for [[Applications]].
+     *
+     * @return ActiveQuery
+     */
+    public function getApplications()
+    {
+        return $this->hasMany(Application::class, ['job_id' => 'id']);
+    }
 }

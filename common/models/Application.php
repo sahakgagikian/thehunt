@@ -2,7 +2,6 @@
 
 namespace common\models;
 
-use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
@@ -10,12 +9,15 @@ use yii\db\ActiveRecord;
  * This is the model class for table "applications".
  *
  * @property int $id
- * @property int|null $candidate_id
- * @property int|null $job_id
- * @property int|null $resume_id
+ * @property int $candidate_id
+ * @property int $job_id
+ * @property int $resume_id
+ * @property int $company_id
  *
  * @property Job $job
  * @property Candidate $candidate
+ * @property Resume $resume
+ * @property Company $company
  */
 class Application extends ActiveRecord
 {
@@ -38,7 +40,7 @@ class Application extends ActiveRecord
             [['candidate_id', 'job_id', 'resume_id'], 'required'],
             [['candidate_id'], 'exist', 'skipOnError' => true, 'targetClass' => Candidate::class, 'targetAttribute' => ['candidate_id' => 'id']],
             [['job_id'], 'exist', 'skipOnError' => true, 'targetClass' => Job::class, 'targetAttribute' => ['job_id' => 'id']],
-            [['candidate_id'], 'unique', 'targetAttribute' => ['candidate_id', 'job_id'], 'message'=>'Application is already sent.'],
+            [['candidate_id'], 'unique', 'targetAttribute' => ['candidate_id', 'job_id'], 'message' => 'Application is already sent.'],
         ];
     }
 

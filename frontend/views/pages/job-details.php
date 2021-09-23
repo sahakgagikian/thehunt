@@ -17,7 +17,7 @@ $this->title = 'Job details';
             <div class="col-lg-8 col-md-6 col-xs-12">
                 <div class="breadcrumb-wrapper">
                     <div class="img-wrapper">
-                        <img src="<?= $jobModel->company->imagePath ?>" style="width: 70px; height: 70px" alt="">
+                        <img src="<?= $jobModel->company->imageUrl ?>" style="width: 70px; height: 70px" alt="">
                     </div>
                     <div class="content">
                         <h3 class="product-title"><?= $jobModel->title ?></h3>

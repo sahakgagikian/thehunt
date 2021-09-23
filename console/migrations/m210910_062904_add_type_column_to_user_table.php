@@ -1,6 +1,5 @@
 <?php
 
-use frontend\models\SignupForm;
 use yii\db\Migration;
 
 /**
@@ -13,7 +12,7 @@ class m210910_062904_add_type_column_to_user_table extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('user', 'type', "enum('" . SignupForm::CANDIDATE . "', '" . SignupForm::COMPANY . "')");
+        $this->addColumn('user', 'type', "enum('candidate', 'company')");
     }
 
     /**

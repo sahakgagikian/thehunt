@@ -8,6 +8,7 @@ use common\models\Job;
 use common\models\Resume;
 use Yii;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 /**
  * Home controller
@@ -29,9 +30,26 @@ class PagesController extends Controller
      *
      * @return mixed
      */
+
+    /**
+     * Finds the Job model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param int $id ID
+     * @return Job the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findJobModel($id)
+    {
+        if (($model = Job::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
     public function actionJobDetails($id)
     {
-        $jobModel = Job::find()->where(['id' => $id])->one();
+        $jobModel = $this->findJobModel($id);
 
         return $this->render('job-details', compact('jobModel'));
     }
@@ -70,36 +88,33 @@ class PagesController extends Controller
      * Displays privacy pricing.
      *
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionApply($id)
     {
-        $currentCandidateId = Yii::$app->getUser()->identity->candidate->id;
-        $candidateResumes = Resume::find()->with(['educations', 'experiences', 'skills'])->where(['candidate_id' => $currentCandidateId])->all();
+        $candidateResumes = Candidate::getCurrentCandidate()->resumes;
+        $jobToApply = $this->findJobModel($id);
 
-        $newApplicationModel = new Application();
-        $newApplicationModel->candidate_id = Yii::$app->user->identity->candidate->id;
-        $newApplicationModel->job_id = Job::find()->where(['id' => $id])->one()->id;
+        $applicationModel = new Application();
+        $applicationModel->candidate_id = Candidate::getCurrentCandidate()->id;
+        $applicationModel->job_id = $jobToApply->id;
+        $applicationModel->company_id = $jobToApply->company_id;
 
-        $successMessage = 'You have successfully applied for this job.';
-        $errors = '';
+        $message = '';
 
         if ($this->request->isPost) {
-            if ($newApplicationModel->load(Yii::$app->request->post()) && $newApplicationModel->save()) {
-                return $this->render('application-result', compact('successMessage'));
+            if ($applicationModel->load(Yii::$app->request->post()) && $applicationModel->save()) {
+                Yii::$app->session->setFlash('success', 'You have successfully applied for this job.');
             }
-            if ($newApplicationModel->hasErrors()) {
-                foreach (array_unique($newApplicationModel->getErrorSummary(true)) as $errorMessage) {
-                    $errors .= $errorMessage . '<br>';
-                }
+            if ($applicationModel->hasErrors()) {
+                $message = $applicationModel->getFirstError('candidate_id');
+                Yii::$app->session->setFlash('error', $message);
             }
 
-            return $this->render('application-result', ['errorMessage' => $errors]);
+            return $this->redirect(['application-result']);
         }
 
-        return $this->render('apply', [
-            'applicationModel' => $newApplicationModel,
-            'candidateResumes' => $candidateResumes,
-        ]);
+        return $this->render('apply', compact('applicationModel', 'candidateResumes'));
     }
 
     /**

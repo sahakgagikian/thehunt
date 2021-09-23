@@ -7,7 +7,6 @@ use common\models\Category;
 use common\models\Company;
 use common\models\Job;
 use common\models\JobsByCategory;
-use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 
 /**
@@ -24,10 +23,7 @@ class JobController extends AdminController
         $searchModel = new JobSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index', compact('searchModel', 'dataProvider'));
     }
 
     /**
@@ -67,6 +63,8 @@ class JobController extends AdminController
     public function actionCreate()
     {
         $model = new Job();
+        $allCategoryIds = Category::getAllCategoryIds();
+        $allCompanyIds = Company::getAllCompanyIds();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -85,11 +83,7 @@ class JobController extends AdminController
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
-            'model' => $model,
-            'allCategoryIds' => ArrayHelper::map(Category::find()->asArray()->all(), 'id', 'title'),
-            'allCompanyIds' => ArrayHelper::map(Company::find()->asArray()->all(), 'id', 'username')
-        ]);
+        return $this->render('create', compact('model', 'allCategoryIds', 'allCompanyIds'));
     }
 
     /**
@@ -102,19 +96,25 @@ class JobController extends AdminController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $allCategoryIds = Category::getAllCategoryIds();
+        $allCompanyIds = Company::getAllCompanyIds();
         $jobsByCategoryModel = JobsByCategory::find()->where(['job_id' => $id])->all();
+
         foreach ($model->categories as $category) {
             $category->jobs_count = $category->categoryJobsCount - 1;
             $category->save();
         }
+
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             foreach ($jobsByCategoryModel as $jbc) {
                 $jbc->delete();
             }
+
             foreach ($model->categoryIds as $id) {
                 $jobOfCategory = new JobsByCategory();
                 $this->setJobOfCategory($jobOfCategory, $model, $id);
                 $newModel = $this->findModel($model->id);
+
                 foreach ($newModel->categories as $category) {
                     $category->jobs_count = $category->categoryJobsCount;
                     $category->save();
@@ -122,11 +122,7 @@ class JobController extends AdminController
             }
             return $this->redirect(['view', 'id' => $model->id]);
         }
-        return $this->render('update', [
-            'model' => $model,
-            'allCategoryIds' => ArrayHelper::map(Category::find()->asArray()->all(), 'id', 'title'),
-            'allCompanyIds' => ArrayHelper::map(Company::find()->asArray()->all(), 'id', 'name')
-        ]);
+        return $this->render('update', compact('model', 'allCategoryIds', 'allCompanyIds'));
     }
 
     private function setJobOfCategory(JobsByCategory $jobOfCategory, $job, $categoryId) {

@@ -4,6 +4,7 @@
 
 /* @var $content string */
 
+use common\models\User;
 use frontend\assets\Asset;
 use yii\helpers\Url;
 use yii\web\View;
@@ -65,7 +66,7 @@ Asset::register($this);
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" id="about" href="<?= Url::to(['about/about']) ?>">About</a></li>
                                     <li><a class="dropdown-item" id="job-page" href="<?= Url::to(['pages/job-page']) ?>">Job Page</a></li>
-                                    <li><a class="dropdown-item" id="resume" href="<?= Url::to(['resume/resume']) ?>">Resume Page</a></li>
+                                    <li><a class="dropdown-item" id="resume" href="<?= Url::to(['candidates/resume']) ?>">Resume Page</a></li>
                                     <li><a class="dropdown-item" id="privacy-policy" href="<?= Url::to(['pages/privacy-policy']) ?>">Privacy
                                             Policy</a></li>
                                     <li><a class="dropdown-item" id="faq" href="<?= Url::to(['pages/faq']) ?>">FAQ</a></li>
@@ -73,8 +74,9 @@ Asset::register($this);
                                     <li><a class="dropdown-item" href="<?= Url::to(['contact/contact']) ?>">Contact</a></li>
                                 </ul>
                             </li>
+
                             <?php if (!Yii::$app->user->isGuest): ?>
-                                <?php if (Yii::$app->user->identity->type === 'candidate'): ?>
+                                <?php if (Yii::$app->user->identity->role === User::CANDIDATE): ?>
                                     <li class="nav-item dropdown" id="candidates">
                                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false">
@@ -87,16 +89,16 @@ Asset::register($this);
                                             <li><a class="dropdown-item" id="browse-categories"
                                                    href="<?= Url::to(['candidates/browse-categories']) ?>">Browse
                                                     Categories</a></li>
-                                            <li><a class="dropdown-item" id="add-resume" href="<?= Url::to(['resume/add-resume']) ?>">Add Resume</a>
+                                            <li><a class="dropdown-item" id="add-resume" href="<?= Url::to(['candidates/add-resume']) ?>">Add Resume</a>
                                             </li>
-                                            <li><a class="dropdown-item" id="manage-resumes" href="<?= Url::to(['resume/manage-resumes']) ?>">Manage
+                                            <li><a class="dropdown-item" id="manage-resumes" href="<?= Url::to(['candidates/manage-resumes']) ?>">Manage
                                                     Resumes</a></li>
                                             <li><a class="dropdown-item" id="job-alerts" href="<?= Url::to(['candidates/job-alerts']) ?>">Job
                                                     Alerts</a>
                                             </li>
                                         </ul>
                                     </li>
-                                <?php elseif (Yii::$app->user->identity->type === 'company'): ?>
+                                <?php elseif (Yii::$app->user->identity->role === User::COMPANY): ?>
                                     <li class="nav-item dropdown" id="employers">
                                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true"
                                            aria-expanded="false">

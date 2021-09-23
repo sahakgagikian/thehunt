@@ -10,8 +10,6 @@ use Yii;
  */
 class CompanySignupForm extends SignupForm
 {
-    const REGISTRATION_TYPE = self::COMPANY;
-
     public $username;
     public $email;
     public $logo;
@@ -40,8 +38,8 @@ class CompanySignupForm extends SignupForm
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
 
-            ['type', 'string'],
-            ['type', 'in', 'range' => [self::REGISTRATION_TYPE]],
+            ['role', 'integer'],
+            ['role', 'in', 'range' => [1, 2]],
         ];
     }
 
@@ -59,7 +57,7 @@ class CompanySignupForm extends SignupForm
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
-        $user->type = self::REGISTRATION_TYPE;
+        $user->role = User::COMPANY;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();

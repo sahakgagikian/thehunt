@@ -18,14 +18,14 @@ use yii\web\IdentityInterface;
  * @property string $password_reset_token
  * @property string $verification_token
  * @property string $email
- * @property string $type
+ * @property integer $role
  * @property string $auth_key
  * @property integer $status
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
  *
- * @property Company $company
+ * @property ActiveQuery $company
  * @property Candidate $candidate
  */
 class User extends ActiveRecord implements IdentityInterface
@@ -34,6 +34,8 @@ class User extends ActiveRecord implements IdentityInterface
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
 
+    const CANDIDATE = 1;
+    const COMPANY = 2;
 
     /**
      * {@inheritdoc}
@@ -61,6 +63,8 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
+            ['role', 'integer'],
+            ['role', 'in', 'range' => [1, 2]],
         ];
     }
 
@@ -221,13 +225,29 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
+    /**
+     * @return ActiveQuery
+     */
     public function getCompany(): ActiveQuery
     {
         return $this->hasOne(Company::class, ['user_id' => 'id']);
     }
 
+    /**
+     * @return ActiveQuery
+     */
     public function getCandidate(): ActiveQuery
     {
         return $this->hasOne(Candidate::class, ['user_id' => 'id']);
+    }
+
+    public function isCandidate(): bool
+    {
+        return $this->role === self::CANDIDATE;
+    }
+
+    public function isCompany(): bool
+    {
+        return $this->role === self::COMPANY;
     }
 }

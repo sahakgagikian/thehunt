@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use Yii;
 use yii\db\ActiveRecord;
 
 /**
@@ -10,6 +11,8 @@ use yii\db\ActiveRecord;
  * @property int $id
  * @property string $username
  * @property int $user_id
+ *
+ * @property Resume $resumes
  */
 class Candidate extends ActiveRecord
 {
@@ -41,5 +44,23 @@ class Candidate extends ActiveRecord
             'id' => 'ID',
             'username' => 'Username',
         ];
+    }
+
+    public static function getCurrentCandidate()
+    {
+        /* @var User $currentUser */
+        $currentUser = Yii::$app->getUser()->identity;
+
+        return $currentUser->candidate;
+    }
+
+    public function getResumes()
+    {
+        return $this->hasMany(Resume::class, ['candidate_id' => 'id']);
+    }
+
+    public function getResumeIds()
+    {
+        return $this->getResumes()->select('id')->column();
     }
 }

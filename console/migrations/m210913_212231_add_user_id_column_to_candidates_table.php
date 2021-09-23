@@ -12,7 +12,7 @@ class m210913_212231_add_user_id_column_to_candidates_table extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('candidates', 'user_id', 'int');
+        $this->addColumn('candidates', 'user_id', $this->integer());
     }
 
     /**

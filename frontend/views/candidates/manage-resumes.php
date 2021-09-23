@@ -34,8 +34,8 @@ $this->title = 'Manage resumes';
                         <li><a href="../../../backend/web/index.php">Bookmarked Jobs</a></li>
                         <li><a href="../../../backend/web/index.php">Notifications <span class="notinumber">2</span></a></li>
                         <li><a href="../../../backend/web/index.php">Manage Applications</a></li>
-                        <li><a class="active" href="<?= Url::to(['resume/manage-resumes']) ?>">Manage Resume</a></li>
-                        <li><a href="../candidates/job-alerts.php">Job Alerts</a></li>
+                        <li><a class="active" href="<?= Url::to(['candidates/manage-resumes']) ?>">Manage Resume</a></li>
+                        <li><a href="job-alerts.php">Job Alerts</a></li>
                         <li><a href="../../../backend/web/index.php">Change Password</a></li>
                         <li><a href="../../../backend/web/index.php">Sing Out</a></li>
                     </ul>
@@ -46,10 +46,10 @@ $this->title = 'Manage resumes';
                     <?php foreach ($candidateResumes as $resume): ?>
                         <div class="manager-resumes-item">
                             <div class="manager-content">
-                                <a href="<?= Url::to(['resume/view-resume/' . $resume->id]) ?>"><img class="resume-thumb" src="<?= $resume->coverImagePath ?>" alt=""></a>
+                                <a href="<?= Url::to(['candidates/view-resume/' . $resume->id]) ?>"><img class="resume-thumb" src="<?= $resume->coverImagePath ?>" alt=""></a>
                                 <div class="manager-info">
                                     <div class="manager-name">
-                                        <h4><a href="<?= Url::to(['resume/view-resume/' . $resume->id]) ?>"><?= $resume->candidate_name ?></a></h4>
+                                        <h4><a href="<?= Url::to(['candidates/view-resume/' . $resume->id]) ?>"><?= $resume->candidate_name ?></a></h4>
                                         <h5><?= $resume->candidate_profession_title ?></h5>
                                     </div>
                                     <div class="manager-meta">
@@ -70,7 +70,7 @@ $this->title = 'Manage resumes';
                             </div>
                         </div>
                     <?php endforeach; ?>
-                    <a class="btn btn-common btn-sm" href="<?= Url::to(['resume/add-resume']) ?>">Add new resume</a>
+                    <a class="btn btn-common btn-sm" href="<?= Url::to(['candidates/add-resume']) ?>">Add new resume</a>
                 </div>
             </div>
         </div>

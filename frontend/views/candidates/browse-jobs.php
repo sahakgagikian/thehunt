@@ -45,7 +45,7 @@ $this->title = 'Browse jobs';
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-xs-12">
                                 <div class="job-company-logo">
-                                    <img src="<?= $job->company->imagePath ?>" style="width: 50px; height: 50px" alt="">
+                                    <img src="<?= $job->company->imageUrl ?>" style="width: 50px; height: 50px" alt="">
                                 </div>
                                 <div class="job-details">
                                     <h3><?= $job['title'] ?></h3>
