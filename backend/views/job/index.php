@@ -1,7 +1,9 @@
 <?php
 
-use yii\helpers\Html;
+use common\models\Category;
+use kartik\select2\Select2;
 use yii\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel backend\models\JobSearch */
@@ -18,8 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Job', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             [
-                'attribute' => 'category',
+                'attribute' => 'category_id',
                 'value' => function ($item) {
                     $value = '';
                     foreach ($item->categories as $category) {
@@ -36,6 +36,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                     return $value;
                 },
+                'filter' => Select2::widget(
+                    [
+                        'model' => $searchModel,
+                        'attribute' => 'categoryId',
+                        'data' => Category::find()->select(['title'])->indexBy('id')->column(),
+                        'options' => [
+                            'placeholder' => '',
+                            'multiple' => true,
+                        ]
+                    ]
+                ),
             ],
 
             'id',

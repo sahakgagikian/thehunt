@@ -2,6 +2,8 @@
 
 use kartik\select2\Select2;
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -15,13 +17,26 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?php $data = $model->getCategories()->select('title')->indexBy('id')->column(); ?>
+
     <?= $form->field($model, 'categoryIds')->widget(Select2::class, [
-        'data' => $allCategoryIds,
-        'model' => $model,
-        'options' => [
-            'placeholder' => 'Choose categories...',
-            'multiple' => true
-        ]
+        'initValueText' => $data,
+        'options' => ['multiple' => true, 'value' => array_keys($data)],
+        'pluginOptions' => [
+            'allowClear' => true,
+            'minimumInputLength' => 1,
+            'language' => [
+                'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
+            ],
+            'ajax' => [
+                'url' => Url::to(['/job/category-list']),
+                'dataType' => 'json',
+                'data' => new JsExpression('function(params) { return {q:params.term}; }')
+            ],
+            'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+            'templateResult' => new JsExpression('function(data) { return data.text; }'),
+            'templateSelection' => new JsExpression('function (data) { return data.text; }'),
+        ],
     ]); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>

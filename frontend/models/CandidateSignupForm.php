@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use common\models\User;
+use frontend\validators\UsernameValidator;
 use Yii;
 
 /**
@@ -18,6 +19,7 @@ class CandidateSignupForm extends SignupForm
         return [
             ['username', 'trim'],
             ['username', 'required'],
+            ['username', UsernameValidator::class],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 

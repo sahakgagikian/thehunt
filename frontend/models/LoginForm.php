@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use common\models\User;
+use frontend\validators\UsernameValidator;
 use Yii;
 use yii\base\Model;
 
@@ -27,6 +28,8 @@ class LoginForm extends Model
         return [
             // username and password are both required
             [['username', 'password'], 'required'],
+            // username cannot contain word 'admin'
+            ['username', UsernameValidator::class],
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()
