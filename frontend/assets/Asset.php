@@ -18,7 +18,6 @@ class Asset extends AppAsset
         'css/responsive.css'
     ];
     public $js = [
-        'js/jquery-min.js',
         'js/popper.min.js',
         'js/bootstrap.min.js',
         'js/color-switcher.js',
@@ -30,5 +29,6 @@ class Asset extends AppAsset
         'js/contact-form-script.js',
         'js/main.js',
         'js/addons.js',
+        'js/prevent-refresh-on-validation-fail.js',
     ];
 }

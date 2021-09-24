@@ -7,7 +7,9 @@ use common\models\Category;
 use common\models\Company;
 use common\models\Job;
 use common\models\JobsByCategory;
+use Yii;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * JobController implements the CRUD actions for Job model.
@@ -125,7 +127,8 @@ class JobController extends AdminController
         return $this->render('update', compact('model', 'allCategoryIds', 'allCompanyIds'));
     }
 
-    private function setJobOfCategory(JobsByCategory $jobOfCategory, $job, $categoryId) {
+    private function setJobOfCategory(JobsByCategory $jobOfCategory, $job, $categoryId)
+    {
         $jobOfCategory->job_id = $job->id;
         $jobOfCategory->category_id = $categoryId;
         $jobOfCategory->save();
@@ -150,5 +153,26 @@ class JobController extends AdminController
         $model->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionCategoryList($q = null)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $out = ['results' => ['id' => '', 'title' => '']];
+        if (!is_null($q)) {
+            $data = Category::find()->select('id, title')
+                ->from('categories')
+                ->where(['like', 'title', $q])
+                ->limit(20)->all();
+            $results = [];
+
+            /* @var Category $datum */
+            foreach ($data as $datum) {
+                $results[] = ['id' => $datum->id, 'text' => $datum->title];
+            }
+            $out['results'] = $results;
+        }
+
+        return $out;
     }
 }

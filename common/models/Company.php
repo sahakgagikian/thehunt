@@ -5,7 +5,6 @@ namespace common\models;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "companies".
@@ -78,7 +77,7 @@ class Company extends ActiveRecord
 
     public static function getAllCompanyIds()
     {
-        return ArrayHelper::map(Company::find()->asArray()->all(), 'id', 'username');
+        return self::find()->select(['username'])->indexBy('id')->column();
     }
 
     /**

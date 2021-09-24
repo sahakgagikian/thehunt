@@ -5,7 +5,6 @@ namespace common\models;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "categories".
@@ -17,6 +16,7 @@ use yii\helpers\ArrayHelper;
  * @property int|null $sort
  * @property string|null $created_at
  * @property string|null $updated_at
+ * @property string $imagePath
  */
 class Category extends ActiveRecord
 {
@@ -83,7 +83,7 @@ class Category extends ActiveRecord
 
     public static function getAllCategoryIds(): array
     {
-        return ArrayHelper::map(Category::find()->asArray()->all(), 'id', 'title');
+        return self::find()->select(['title'])->indexBy('id')->column();
     }
 
     /**

@@ -9,6 +9,7 @@ use common\models\Job;
 use common\models\Resume;
 use common\models\Skill;
 use common\models\User;
+use frontend\helpers\SiteHelper;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -144,29 +145,17 @@ class CandidatesController extends Controller
             }
 
             if ($resumeModel->save()) {
-                $this->handleAddonExistence('Education', $resumeModel, Education::class);
-                $this->handleAddonExistence('Experience', $resumeModel, Experience::class);
-                $this->handleAddonExistence('Skill', $resumeModel, Skill::class);
+                $postRequest = $this->request->post();
+
+                SiteHelper::handleAddonExistence('Education', $resumeModel, Education::class, $postRequest);
+                SiteHelper::handleAddonExistence('Experience', $resumeModel, Experience::class, $postRequest);
+                SiteHelper::handleAddonExistence('Skill', $resumeModel, Skill::class, $postRequest);
 
                 return $this->goHome();
             }
         }
 
         return $this->render('add-resume', compact('resumeModel'));
-    }
-
-    public function handleAddonExistence($key, $resumeModel, $addonModelClassName)
-    {
-        if (array_key_exists($key, $this->request->post())) {
-            foreach ($this->request->post()[$key] as $addonData) {
-                $addonModel = new $addonModelClassName();
-
-                if ($addonModel->load([$key => $addonData])) {
-                    $addonModel->resume_id = $resumeModel->id;
-                    $addonModel->save();
-                }
-            }
-        }
     }
 
     /**
