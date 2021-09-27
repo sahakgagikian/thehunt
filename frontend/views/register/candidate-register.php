@@ -40,6 +40,7 @@ $this->title = 'Register as candidate';
                         'options' => [
                             'class' => 'login-form'
                         ],
+                        'enableClientValidation' => true,
                     ]); ?>
                     <div class="form-group">
                         <div class="input-icon">
