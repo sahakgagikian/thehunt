@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Candidate;
 use common\models\Company;
+use DateTimeZone;
 use frontend\models\CandidateSignupForm;
 use frontend\models\CompanySignupForm;
 use Yii;
@@ -23,6 +24,7 @@ class RegisterController extends Controller
     public function actionCandidateRegister()
     {
         $model = new CandidateSignupForm();
+        $timezoneList = DateTimeZone::listIdentifiers();
 
         if ($model->load(Yii::$app->request->post()) && $user = $model->signup()) {
             $newCandidate = new Candidate();
@@ -33,7 +35,7 @@ class RegisterController extends Controller
             return $this->goHome();
         }
 
-        return $this->render('candidate-register', compact('model'));
+        return $this->render('candidate-register', compact('model', 'timezoneList'));
     }
 
     /**
@@ -44,6 +46,7 @@ class RegisterController extends Controller
     public function actionEmployerRegister()
     {
         $model = new CompanySignupForm();
+        $timezoneList = DateTimeZone::listIdentifiers();
 
         if ($model->load(Yii::$app->request->post())) {
             $model->logo = UploadedFile::getInstance($model, 'logo');
@@ -61,6 +64,6 @@ class RegisterController extends Controller
             return $this->goHome();
         }
 
-        return $this->render('employer-register', compact('model'));
+        return $this->render('employer-register', compact('model', 'timezoneList'));
     }
 }

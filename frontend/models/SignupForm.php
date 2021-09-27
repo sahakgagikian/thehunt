@@ -15,6 +15,7 @@ class SignupForm extends Model
     public $email;
     public $password;
     public $role;
+    public $timezone;
 
     /**
      * Sends confirmation email to user

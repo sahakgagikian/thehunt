@@ -3,6 +3,7 @@
 /* @var $this yii\web\View */
 /* @var $candidateResumes array */
 
+use frontend\helpers\SiteHelper;
 use yii\helpers\Url;
 
 $this->title = 'Manage resumes';
@@ -60,7 +61,7 @@ $this->title = 'Manage resumes';
                             </div>
                             <div class="update-date">
                                 <p class="status">
-                                    <strong>Updated on:</strong> <?= date("d-m-Y", strtotime($resume->update_date)) ?>
+                                    <strong>Updated on:</strong> <?= SiteHelper::dateTimeInTimezone($resume->update_date_and_time) ?>
                                 </p>
                                 <div class="action-btn">
                                     <a class="btn btn-xs btn-gray" href="#">Hide</a>

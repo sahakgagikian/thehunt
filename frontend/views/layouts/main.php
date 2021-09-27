@@ -156,6 +156,11 @@ Asset::register($this);
                                     </ul>
                                 </li>
                             <?php else: ?>
+                                <li class="nav-item" id="settings">
+                                    <a class="nav-link" href="<?= Url::to(['site/settings']) ?>">
+                                        Settings
+                                    </a>
+                                </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= Url::to(['log/logout']) ?>" data-method="post">
                                         Log out (<?= Yii::$app->user->identity->username ?>)

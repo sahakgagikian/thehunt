@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\User;
+use DateTimeZone;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -256,5 +257,32 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+
+    /**
+     * Allows user to change settings.
+     * @return mixed
+     */
+    public function actionSettings()
+    {
+        /* @var $model User */
+        $model = Yii::$app->getUser()->identity;
+        $timezoneList = DateTimeZone::listIdentifiers();
+        $currentUsersTimezone = $model->timezone;
+
+        if ($this->request->isPost) {
+            $postRequest = $this->request->post();
+//            $timezone = $timezoneList[$postRequest['User']['timezone']];
+
+            if ($model->load($this->request->post())) {
+//                $model->timezone = $timezone;
+
+                if ($model->save()) {
+                    return $this->goHome();
+                }
+            }
+        }
+
+        return $this->render('settings', compact('model', 'timezoneList', 'currentUsersTimezone'));
     }
 }
