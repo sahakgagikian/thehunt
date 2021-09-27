@@ -1,10 +1,11 @@
 <?php
 
 /* @var $this yii\web\View */
-
 /* @var $model CandidateSignupForm */
+/* @var $timezoneList array */
 
 use frontend\models\CandidateSignupForm;
+use kartik\select2\Select2;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
@@ -61,6 +62,15 @@ $this->title = 'Register as candidate';
                                     'placeholder' => 'Email Address'])
                                 ->label(false) ?>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <?= $form->field($model, 'timezone')->widget(Select2::class, [
+                            'data' => $timezoneList,
+                            'model' => $model,
+                            'options' => [
+                                'placeholder' => 'Your timezone'
+                            ]])
+                            ->label(false) ?>
                     </div>
                     <div class="form-group">
                         <div class="input-icon">

@@ -9,6 +9,8 @@ use common\models\Job;
 use common\models\Resume;
 use common\models\Skill;
 use common\models\User;
+use DateTime;
+use DateTimeZone;
 use Yii;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -125,7 +127,7 @@ class CandidatesController extends Controller
 
         $currentUser = Yii::$app->user->identity;
         $resumeModel = new Resume();
-        $resumeModel->update_date = date("Y/m/d");
+        $resumeModel->update_date_and_time = date("Y/m/d H:i:s");
 
         if ($this->request->isPost && $resumeModel->load($this->request->post())) {
             $resumeModel->candidate_id = $currentUser->candidate->id;

@@ -3,6 +3,7 @@
 namespace frontend\models;
 
 use common\models\User;
+use DateTimeZone;
 use Yii;
 
 /**
@@ -32,6 +33,9 @@ class CandidateSignupForm extends SignupForm
 
             ['role', 'integer'],
             ['role', 'in', 'range' => [1, 2]],
+
+            ['timezone', 'string'],
+            ['timezone', 'required'],
         ];
     }
 
@@ -46,10 +50,15 @@ class CandidateSignupForm extends SignupForm
             return null;
         }
 
+        $postRequest = Yii::$app->request->post();
+        $timezoneList = DateTimeZone::listIdentifiers();
+        $selectedTimezone = $timezoneList[$postRequest['CandidateSignupForm']['timezone']];
+
         $user = new User();
         $user->username = $this->username;
         $user->email = $this->email;
         $user->role = User::CANDIDATE;
+        $user->timezone = $selectedTimezone;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();

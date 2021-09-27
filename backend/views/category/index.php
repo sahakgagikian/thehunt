@@ -36,8 +36,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'jobs_count',
             'sort',
-            'created_at',
-            'updated_at',
+
+            [
+                'attribute' => 'created_at',
+                'value' => function ($item) {
+                    $date = new DateTime($item->created_at);
+                    $date->setTimezone(new DateTimeZone('Asia/Yerevan'));
+
+                    return $date->format('Y-m-d H:i:s');
+                },
+            ],
+
+            [
+                'attribute' => 'updated_at',
+                'value' => function ($item) {
+                    $date = new DateTime($item->updated_at);
+                    $date->setTimezone(new DateTimeZone('Asia/Yerevan'));
+
+                    return $date->format('Y-m-d H:i:s');
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

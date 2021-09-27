@@ -20,7 +20,7 @@ use yii\db\ActiveRecord;
  * @property string|null $cover_image
  * @property string|null $educations_cover_image
  * @property string|null $experiences_cover_image
- * @property string $update_date
+ * @property string $update_date_and_time
  *
  * @property Candidate $candidate
  * @property Education $educations
@@ -43,11 +43,11 @@ class Resume extends ActiveRecord
     public function rules()
     {
         return [
-            [['candidate_id', 'candidate_name', 'candidate_email', 'candidate_profession_title', 'candidate_location', 'candidate_age', 'update_date'], 'required'],
+            [['candidate_id', 'candidate_name', 'candidate_email', 'candidate_profession_title', 'candidate_location', 'candidate_age', 'update_date_and_time'], 'required'],
             [['candidate_id', 'candidate_age'], 'integer'],
             [['candidate_age'], 'integer'],
             [['candidate_desired_salary'], 'number'],
-            [['candidate_name', 'candidate_email', 'candidate_location', 'candidate_website', 'update_date'], 'string', 'max' => 255],
+            [['candidate_name', 'candidate_email', 'candidate_location', 'candidate_website', 'update_date_and_time'], 'string', 'max' => 255],
             [['candidate_id'], 'exist', 'skipOnError' => true, 'targetClass' => Candidate::class, 'targetAttribute' => ['candidate_id' => 'id']],
         ];
     }
@@ -69,7 +69,7 @@ class Resume extends ActiveRecord
             'cover_image' => 'Cover Image',
             'educations_cover_image' => 'Educations Cover Image',
             'experiences_cover_image' => 'Experiences Cover Image',
-            'update_date' => 'Updated on',
+            'update_date_and_time' => 'Updated on',
         ];
     }
 

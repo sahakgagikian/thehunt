@@ -24,6 +24,7 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  * @property string $password write-only password
+ * @property string $timezone
  *
  * @property ActiveQuery $company
  * @property Candidate $candidate
@@ -65,6 +66,8 @@ class User extends ActiveRecord implements IdentityInterface
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
             ['role', 'integer'],
             ['role', 'in', 'range' => [1, 2]],
+            ['timezone', 'string'],
+            ['timezone', 'required'],
         ];
     }
 
